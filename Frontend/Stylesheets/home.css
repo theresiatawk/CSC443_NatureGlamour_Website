@@ -122,3 +122,10 @@ body {
 *::after {
   box-sizing: border-box;
 }
+h3{
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: calc(1.3rem + 0.6vw);
+}
