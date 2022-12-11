@@ -2,29 +2,66 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NatureGlamour</title>
+    <title>YelpCamp</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../Stylesheets/app.css" />
   </head>
-  <body>
-    <div class="container d-flex justify-content-center align-items-center mt-5">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
-          <div class="card shadow">
+
+  <body class="main-container">
+    <nav class="navbar nav-bar navbar-expand-lg navbar-dark">
+      <div class="container-fluidd">
+        <a class="navbar-brandd" href="#">NatureGlamour</a>
+        <button
+          class="navbar-togglerr"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-iconn"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/campgrounds">Spots</a>
+            <a class="nav-link" href="/campgrounds/new">Gallery</a>
+          </div>
+          <div class="navbar-nav ml-auto">
+            
+                <!-- <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/register">Register</a>
+                <a class="nav-link" href="/logout">Logout</a> -->
+                
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- <main class="container mt-3"></main> -->
+    <div
+      class="card-container"
+    >
+      <div class="raw">
+        <div class="sub-container">
+          <div class="card-content">
             <img
-              src="https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"
+              src="../Utils/login-img.png"
               alt=""
-              class="card-img-top"
+              class="card-img"
             />
             <div class="card-body">
               <h5 class="card-title">Login</h5>
               <form
                 action="/login"
                 method="POST"
-                class="validated-form"
                 novalidate
               >
-                <div class="mb-3">
+                <div class="input">
                   <label class="form-label" for="username">Username</label>
                   <input
                     class="form-control"
@@ -37,7 +74,7 @@
                   <div class="valid-feedback">Looks good!</div>
                 </div>
 
-                <div class="mb-3">
+                <div class="input">
                   <label class="form-label" for="password">Password</label>
                   <input
                     class="form-control"
@@ -48,12 +85,13 @@
                   />
                   <div class="valid-feedback">Looks good!</div>
                 </div>
-                <button class="btn btn-success btn-block">Login</button>
+                <button class="btn">Login</button>
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <footer class="footer"></footer>
   </body>
 </html>
