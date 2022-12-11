@@ -31,24 +31,24 @@ h5{
   background-color: #343a40;
 }
 @media (min-width: 992px) {
-  .navbar-expand-l {
+  .navbar-expand-lg {
     flex-wrap: nowrap;
     justify-content: flex-start;
   }
-  .navbar-expand-l .navbar-nav {
+  .navbar-expand-lg .navbar-nav {
     flex-direction: row;
   }
-  .navbar-expand-l .navbar-nav {
+  .navbar-expand-lg .navbar-nav {
     position: absolute;
   }
-  .navbar-expand-l .navbar-nav .nav-link {
+  .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
   }
-  .navbar-expand-l .navbar-collapse {
+  .navbar-expand-lg .navbar-collapse {
     display: flex !important;
   }
-  .navbar-expand-l .navbar-toggler {
+  .navbar-expand-lg .navbar-togglerr {
     display: none;
   }
 }
@@ -84,7 +84,7 @@ h5{
   border-radius: 0.25rem;
   transition: box-shadow 0.15s ease-in-out;
 }
-.navbar-toggler-icon {
+.navbar-toggler-iconn {
   display: inline-block;
   width: 1.5em;
   height: 1.5em;
@@ -92,6 +92,7 @@ h5{
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");  
 }
 
 .navbar-togglerr:hover {
@@ -102,6 +103,29 @@ h5{
   text-decoration: none;
   outline: 0;
   box-shadow: 0 0 0 0.2rem;
+}
+.nav-linkk {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  color: white;
+}
+
+.nav-linkk:hover {
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+.nav-linkk.active {
+  color: white;
+  border-bottom-color: white;
+}
+.collapsee:not(.show) {
+  display: none;
+}
+.nav-bar-collapse{
+  align-items: center;
+  width: 100%;
 }
 .card-container {
   width: 100%;
