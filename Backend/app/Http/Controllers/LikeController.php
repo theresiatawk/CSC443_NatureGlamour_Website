@@ -119,19 +119,19 @@ class LikeController extends Controller
             'total' => count($likes)
         ], 200);   
     }
-    function checkLike($post_id, $user_id){
+    function checkLike($user_id, $post_id){
         $like = Like::where('user_id', $user_id)
                     ->where('post_id',$post_id)
                     ->get();
-        if($like){
+        if(count($like) == 0){
             return response()->json([
                 'status' => 'success',
-                'results' => 'true'
+                'results' => 'false'
             ], 200);
         }
         return response()->json([
             'status' => 'success',
-            'results' => 'false'
+            'results' => 'true'
         ], 200);
     }
 }
