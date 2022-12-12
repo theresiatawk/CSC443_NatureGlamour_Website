@@ -60,7 +60,7 @@ class LikeController extends Controller
             ], 200);
         }
     }
-    function deleteLike(){
+    function deleteLike(Request $request){
         $validate = Validator::make($request->all(), [
             'user_id' => 'required|integer',
             'post_id' => 'required|integer'
@@ -80,6 +80,14 @@ class LikeController extends Controller
                 "status" => "error",
                 "results" => "Like does not exist"
             ], 404);
+        }
+        //Delete like
+        if($like[0]->delete()){
+            return response()->json([
+                'status' => 'success',
+                'results' => 'Like Deleted',
+                'like' => $like
+            ], 200);
         }
     }
 }
