@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\User; 
 use Validator;
+use File;
 
 class PostController extends Controller
 {
@@ -38,7 +39,7 @@ class PostController extends Controller
                     "status" => "error",
                     "results" => "Invalid User"
                 ], 401);
-            } 
+            }
             // Save the file locally in the storage/public/ folder under a new folder named /product
             $request->image->store('posts', 'public');
 
@@ -93,8 +94,7 @@ class PostController extends Controller
             "results" => "This user is not allowed to delete this image"
             ], 401);
         }
-        
-        if(Storage::delete("../../../storage/app/public/posts/".$postt[0]->url)) {
+        if(Storage::delete("app/public/posts/".$postt[0]->url)){
             if($postt[0]->delete()){
                 return response()->json([
                     'status' => 'success',
@@ -103,6 +103,5 @@ class PostController extends Controller
                 ], 200);
             };
         }
-
     }
 }
