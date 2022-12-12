@@ -10,6 +10,37 @@ use Validator;
 
 class AuthController extends Controller
 {
+    function login(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
+        if($validate->fails()){
+            return response()->json([
+                "status" => "failed",
+                "results" => "Some fields are empty"
+            ], 400);
+        }
+        $credentials = $request->only('email', 'password');
+        $token = Auth::attempt($credentials);
+        if (!$token) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid Credentials',
+            ], 401);
+        }
+        $user = Auth::user();
+        return response()->json([
+                'status' => 'success',
+                'user' => $user,
+                'authorisation' => [
+                    'token' => $token,
+                    'type' => 'bearer',
+                ]
+            ]);
+
+    }
     function register(Request $request){
         $validate_username = Validator::make($request->all(), [
             'username' => 'required|string|alpha_dash|max:255',
@@ -17,7 +48,7 @@ class AuthController extends Controller
         if($validate_username->fails()){
             return response()->json([
                 "status" => "failed",
-                "results" => "Useername must contain letters, numbers, dashes and underscores and NOT space"
+                "results" => "Username must contain letters, numbers, dashes and underscores and NOT space"
             ], 400);
         }
         $validate_email_exist = Validator::make($request->all(), [

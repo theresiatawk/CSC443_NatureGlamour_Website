@@ -20,7 +20,7 @@ use App\Http\Controllers\AuthController;
 // });
 Route::group(["prefix"=> "v0.1"], function(){
     Route::controller(AuthController::class)->group(function () {
-        // Route::post("/signin", 'login');
-        Route::post("/signup", 'register');
+        Route::post("glamour/login", 'login');
+        Route::post("glamour/signup", 'register');
     });
 });
