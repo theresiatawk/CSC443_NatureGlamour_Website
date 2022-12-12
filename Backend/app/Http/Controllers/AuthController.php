@@ -11,16 +11,40 @@ use Validator;
 class AuthController extends Controller
 {
     function register(Request $request){
-        $validate = Validator::make($request->all(), [
+        $validate_username = Validator::make($request->all(), [
             'username' => 'required|string|alpha_dash|max:255',
-            'email' => 'required|string|regex:/(.+)@(.+)\.(.+)/i|max:255|unique:users',
-            'password' => 'required|string|min:6',
         ]);
-
-        if($validate->fails()){
+        if($validate_username->fails()){
             return response()->json([
                 "status" => "failed",
-                "results" => []
+                "results" => "Useername must contain letters, numbers, dashes and underscores and NOT space"
+            ], 400);
+        }
+        $validate_email_exist = Validator::make($request->all(), [
+            'email' => 'required|string|regex:/(.+)@(.+)\.(.+)/i|max:255|unique:users',
+        ]);
+        if($validate_email_exist->fails()){
+            return response()->json([
+                "status" => "failed",
+                "results" => "This email is already registred"
+            ], 400);
+        }
+        $validate_email = Validator::make($request->all(), [
+            'email' => 'required|string|regex:/(.+)@(.+)\.(.+)/i|max:255|unique:users',
+        ]);
+        if($validate_email->fails()){
+            return response()->json([
+                "status" => "failed",
+                "results" => "Invalid email format"
+            ], 400);
+        }
+        $validate_password = Validator::make($request->all(), [
+            'password' => 'required|string|min:8', 
+        ]);
+        if($validate_password->fails()){
+            return response()->json([
+                "status" => "failed",
+                "results" => "Password must contain at least 8 characters"
             ], 400);
         }
         $user = new User;
