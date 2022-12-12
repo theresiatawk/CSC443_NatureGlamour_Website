@@ -18,7 +18,7 @@ class AuthController extends Controller
         ]);
         if($validate->fails()){
             return response()->json([
-                "status" => "failed",
+                "status" => "error",
                 "results" => "Some fields are empty"
             ], 400);
         }
@@ -39,7 +39,6 @@ class AuthController extends Controller
                     'type' => 'bearer',
                 ]
             ]);
-
     }
     function register(Request $request){
         $validate_username = Validator::make($request->all(), [
@@ -47,7 +46,7 @@ class AuthController extends Controller
         ]);
         if($validate_username->fails()){
             return response()->json([
-                "status" => "failed",
+                "status" => "error",
                 "results" => "Username must contain letters, numbers, dashes and underscores and NOT space"
             ], 400);
         }
@@ -56,7 +55,7 @@ class AuthController extends Controller
         ]);
         if($validate_email_exist->fails()){
             return response()->json([
-                "status" => "failed",
+                "status" => "error",
                 "results" => "This email is already registred"
             ], 400);
         }
@@ -65,7 +64,7 @@ class AuthController extends Controller
         ]);
         if($validate_email->fails()){
             return response()->json([
-                "status" => "failed",
+                "status" => "error",
                 "results" => "Invalid email format"
             ], 400);
         }
@@ -74,7 +73,7 @@ class AuthController extends Controller
         ]);
         if($validate_password->fails()){
             return response()->json([
-                "status" => "failed",
+                "status" => "error",
                 "results" => "Password must contain at least 8 characters"
             ], 400);
         }
