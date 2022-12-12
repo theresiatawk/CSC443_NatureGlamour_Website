@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\User; 
 use Validator;
@@ -49,7 +50,7 @@ class PostController extends Controller
             if($post->save()){
                 return response()->json([
                     'status' => 'success',
-                    'results' => 'Image Added',
+                    'results' => 'Post Added',
                     'post' => $post
                 ], 200);
             };
@@ -78,21 +79,30 @@ class PostController extends Controller
         if(!$post){
             return response()->json([
                 "status" => "error",
-                "results" => "Image does not exist"
+                "results" => "Post does not exist"
             ], 400);
         }
         // Check if user is allowed to delete it
         $postt = Post::where("user_id", $request->user_id)
-                    ->where("id", $request->id)
+                    ->where("id", $request->post_id)
                     ->get();
         
-        if(!$postt){
+        if(count($postt) == 0){
             return response()->json([
             "status" => "error",
             "results" => "This user is not allowed to delete this image"
-            ], 400);
+            ], 401);
         }
-        $img_path = public_path().'/'.$postt->url;
+        
+        if(Storage::delete("../../../storage/app/public/posts/".$postt[0]->url)) {
+            if($postt[0]->delete()){
+                return response()->json([
+                    'status' => 'success',
+                    'results' => 'Post Deleted',
+                    'post' => $postt
+                ], 200);
+            };
+        }
 
     }
 }

@@ -26,8 +26,11 @@ Route::group(["prefix"=> "v0.1"], function(){
             Route::post("/signup", "register");
             Route::post("/logout", "logout");
         });
-        Route::controller(PostController::class)->group(function () {
-            Route::post("/addPost", "addPost");
+        Route::group(["prefix"=> "posts"], function(){
+            Route::controller(PostController::class)->group(function () {
+                Route::post("/add", "addPost");
+                Route::post("/delete", "deletePost");
+            });
         });
     });
 });
