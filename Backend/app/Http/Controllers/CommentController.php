@@ -14,7 +14,8 @@ class CommentController extends Controller
     function addComment(Request $request){
         $validate = Validator::make($request->all(), [
             'user_id' => 'required|integer',
-            'post_id' => 'required|integer'
+            'post_id' => 'required|integer',
+            'comment' => 'required|string'
         ]);
         if($validate->fails()){
             return response()->json([
@@ -41,6 +42,7 @@ class CommentController extends Controller
         $comment = new Comment;
         $comment->user_id = $request->user_id;
         $comment->post_id = $request->post_id;
+        $comment->comment = $request->comment;
         if($comment->save()){
             return response()->json([
                 'status' => 'success',
