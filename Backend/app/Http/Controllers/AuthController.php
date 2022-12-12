@@ -33,12 +33,13 @@ class AuthController extends Controller
         $user = Auth::user();
         return response()->json([
                 'status' => 'success',
+                'results' => 'User logged in successfully',
                 'user' => $user,
                 'authorisation' => [
                     'token' => $token,
                     'type' => 'bearer',
                 ]
-            ]);
+            ], 200);
     }
 
     function register(Request $request){
@@ -87,13 +88,13 @@ class AuthController extends Controller
             $token = Auth::login($user);
             return response()->json([
             'status' => 'success',
-            'message' => 'User created successfully',
+            'results' => 'User created successfully',
             'user' => $user,
             'authorisation' => [
                 'token' => $token,
                 'type' => 'bearer',
             ]
-        ]);
+        ],200);
         }else{
             return response()->json([
                 "status" => "error",
@@ -102,10 +103,11 @@ class AuthController extends Controller
         }
     }
     function logout(){
-        Auth::logout();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully logged out',
-        ]);
+        if(Auth::logout()){
+            return response()->json([
+                'status' => 'success',
+                'results' => 'Successfully logged out',
+            ], 200);
+        }
     }
 }
