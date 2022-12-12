@@ -52,13 +52,13 @@ class AuthController extends Controller
                 "results" => "Username must contain letters, numbers, dashes and underscores and NOT space"
             ], 400);
         }
-        $validate_email_exist = Validator::make($request->all(), [
-            'email' => 'required|string|regex:/(.+)@(.+)\.(.+)/i|max:255',
+        $validate_username_exist = Validator::make($request->all(), [
+            'username' => 'required|string|alpha_dash|max:255|unique:users',
         ]);
-        if($validate_email_exist->fails()){
+        if($validate_username_exist->fails()){
             return response()->json([
                 "status" => "error",
-                "results" => "This email is already registred"
+                "results" => "This username is already registred"
             ], 400);
         }
         $validate_email = Validator::make($request->all(), [
