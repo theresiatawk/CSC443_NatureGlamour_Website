@@ -40,6 +40,7 @@ class AuthController extends Controller
                 ]
             ]);
     }
+
     function register(Request $request){
         $validate_username = Validator::make($request->all(), [
             'username' => 'required|string|alpha_dash|max:255',
@@ -83,13 +84,19 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
 
         if($user->save()){
+            $token = Auth::login($user);
             return response()->json([
-                "status" => "success",
-                "results" => $user
-            ], 200);
+            'status' => 'success',
+            'message' => 'User created successfully',
+            'user' => $user,
+            'authorisation' => [
+                'token' => $token,
+                'type' => 'bearer',
+            ]
+        ]);
         }else{
             return response()->json([
-                "status" => "failure",
+                "status" => "error",
                 "results" => []
             ], 400);
         }
