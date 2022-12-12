@@ -90,4 +90,35 @@ class LikeController extends Controller
             ], 200);
         }
     }
+    function getLikes($post_id){
+        if(!$post_id){
+            return response()->json([
+                "status" => "error",
+                "results" => "Some fields are empty"
+            ], 400);
+        }
+        $post = Post::find($post_id);
+        if(!$post){
+            return response()->json([
+                "status" => "error",
+                "results" => "Post does not exist"
+            ], 404);
+        }
+        $likes = DB::table('users')
+            ->join('likes', 'users.id', '=', 'likes.user_id')
+            ->select('users.username')
+            ->get();
+
+        if(count($likes) == 0){
+            return response()->json([
+                'status' => 'failure',
+                'results' => 'No likes',
+            ]);
+        } 
+        return response()->json([
+            'status' => 'success',
+            'results' => 'Likes',
+            'like' => $likes
+        ], 200);   
+    }
 }
