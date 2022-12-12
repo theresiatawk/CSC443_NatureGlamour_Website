@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('likes', function (Blueprint $table) {
-            $table->id();
+            $table->primary('post_id');
+            $table->primary('user_id');
             $table->timestamps();
         });
     }

@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('spots', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->string('title');
+            $table->integer('coordinate_x');
+            $table->integer('coordinate_y');
+            $table->string('description');
+            $table->string('location');
+            $table->string('url');
             $table->timestamps();
         });
     }
