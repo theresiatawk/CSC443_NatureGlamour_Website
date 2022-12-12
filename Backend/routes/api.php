@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CommentController;
 
 
 /*
@@ -41,6 +42,13 @@ Route::group(["prefix"=> "v0.1"], function(){
                 Route::post("/delete", "deleteLike");
                 Route::get("/{user_id}/{post_id}", "checkLike");
                 Route::get("/{post_id}","getLikes");
+            });
+        });
+        Route::group(["prefix"=> "comments"], function(){
+            Route::controller(CommentController::class)->group(function () {
+                Route::post("/add", "addComment");
+                Route::post("/delete", "deleteComment");
+                Route::get("/{post_id}","getComments");
             });
         });
     });
