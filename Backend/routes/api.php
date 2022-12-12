@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LikeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,14 @@ Route::group(["prefix"=> "v0.1"], function(){
             Route::controller(PostController::class)->group(function () {
                 Route::post("/add", "addPost");
                 Route::post("/delete", "deletePost");
+                Route::get("/","getPosts");
+            });
+        });
+        Route::group(["prefix"=> "likes"], function(){
+            Route::controller(LikeController::class)->group(function () {
+                Route::post("/add", "addLike");
+                Route::post("/delete", "deleteLike");
+                Route::get("/","getLikes");
             });
         });
     });
