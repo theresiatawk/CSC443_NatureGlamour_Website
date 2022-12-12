@@ -44,7 +44,7 @@ class AuthController extends Controller
 
     function register(Request $request){
         $validate_username = Validator::make($request->all(), [
-            'username' => 'required|string|alpha_dash|max:255',
+            'username' => 'required|string|alpha_dash|max:255|unique:users',
         ]);
         if($validate_username->fails()){
             return response()->json([
@@ -53,7 +53,7 @@ class AuthController extends Controller
             ], 400);
         }
         $validate_email_exist = Validator::make($request->all(), [
-            'email' => 'required|string|regex:/(.+)@(.+)\.(.+)/i|max:255|unique:users',
+            'email' => 'required|string|regex:/(.+)@(.+)\.(.+)/i|max:255',
         ]);
         if($validate_email_exist->fails()){
             return response()->json([

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Like;
@@ -91,12 +92,6 @@ class LikeController extends Controller
         }
     }
     function getLikes($post_id){
-        if(!$post_id){
-            return response()->json([
-                "status" => "error",
-                "results" => "Some fields are empty"
-            ], 400);
-        }
         $post = Post::find($post_id);
         if(!$post){
             return response()->json([
@@ -106,19 +101,22 @@ class LikeController extends Controller
         }
         $likes = DB::table('users')
             ->join('likes', 'users.id', '=', 'likes.user_id')
-            ->select('users.username')
+            ->where('likes.post_id', '=', $post_id)
+            ->select('users.email')
             ->get();
 
         if(count($likes) == 0){
             return response()->json([
                 'status' => 'failure',
                 'results' => 'No likes',
+                'total' => 0
             ]);
-        } 
+        }
         return response()->json([
             'status' => 'success',
             'results' => 'Likes',
-            'like' => $likes
+            'like' => $likes,
+            'total' => count($likes)
         ], 200);   
     }
 }
