@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,14 @@ use App\Http\Controllers\AuthController;
 //     return $request->user();
 // });
 Route::group(["prefix"=> "v0.1"], function(){
-    Route::controller(AuthController::class)->group(function () {
-        Route::post("glamour/login", 'login');
-        Route::post("glamour/signup", 'register');
-        Route::post("glamour/logout", 'logout');
+    Route::group(["prefix"=> "glamour"], function(){
+        Route::controller(AuthController::class)->group(function () {
+            Route::post("/login", "login");
+            Route::post("/signup", "register");
+            Route::post("/logout", "logout");
+        });
+        Route::controller(PostController::class)->group(function () {
+            Route::post("/addPost", "addPost");
+        });
     });
 });
