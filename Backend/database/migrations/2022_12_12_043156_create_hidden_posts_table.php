@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('hidden_posts', function (Blueprint $table) {
-            $table->primary('post_id');
-            $table->primary('user_id_hiding');
-            $table->primary('user_id_hidden_from');
+            $table->id();
+            $table->integer('post_id');
+            $table->integer('user_id_hiding');
+            $table->integer('user_id_hidden_from');
             $table->timestamps();
         });
     }
