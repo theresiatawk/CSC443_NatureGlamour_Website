@@ -57,7 +57,6 @@ class LikeController extends Controller
             return response()->json([
                 'status' => 'success',
                 'results' => 'Like Added',
-                'post' => $post
             ], 200);
         }
     }
