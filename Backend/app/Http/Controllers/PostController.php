@@ -32,7 +32,7 @@ class PostController extends Controller
                 ], 400);
             }
             $user = User::find($request->user_id);
-            if(!user){
+            if(!$user){
                 return response()->json([
                     "status" => "error",
                     "results" => "Invalid User"
@@ -50,7 +50,7 @@ class PostController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'results' => 'Image Added',
-                    'image' => $image
+                    'post' => $post
                 ], 200);
             };
         }
@@ -60,5 +60,39 @@ class PostController extends Controller
                 "results" => "Missing an image"
             ], 400);
         }
+    }
+
+    function deletePost(Request $request){
+        $validate = Validator::make($request->all(), [
+            'user_id' => 'required|integer',
+            'post_id' => 'required|string',
+        ]);
+        if($validate->fails()){
+            return response()->json([
+                "status" => "error",
+                "results" => "Some fields are empty"
+            ], 400);
+        }
+        // Check if image exist
+        $post = Post::find($request->post_id);
+        if(!$post){
+            return response()->json([
+                "status" => "error",
+                "results" => "Image does not exist"
+            ], 400);
+        }
+        // Check if user is allowed to delete it
+        $postt = Post::where("user_id", $request->user_id)
+                    ->where("id", $request->id)
+                    ->get();
+        
+        if(!$postt){
+            return response()->json([
+            "status" => "error",
+            "results" => "This user is not allowed to delete this image"
+            ], 400);
+        }
+        $img_path = public_path().'/'.$postt->url;
+
     }
 }
