@@ -22,5 +22,6 @@ Route::group(["prefix"=> "v0.1"], function(){
     Route::controller(AuthController::class)->group(function () {
         Route::post("glamour/login", 'login');
         Route::post("glamour/signup", 'register');
+        Route::post("glamour/logout", 'logout');
     });
 });
