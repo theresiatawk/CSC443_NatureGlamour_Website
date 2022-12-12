@@ -104,4 +104,17 @@ class PostController extends Controller
             };
         }
     }
+    function getPosts(){
+        $posts = Post::all();
+        if(count($posts) == 0){
+            return response()->json([
+                "status" => "success",
+                "results" => "No Posts"
+            ], 200);
+        }
+        return response()->json([
+            "status" => "success",
+            "posts" => $posts
+        ], 200);
+    }
 }
