@@ -41,7 +41,9 @@ class AuthController extends Controller
                 ]
             ], 200);
     }
-
+    function redirect (){
+        return response()->json(['status' => 'error', 'results'=> 'Noth Authenticated']);
+    }
     function register(Request $request){
         $validate_username = Validator::make($request->all(), [
             'username' => 'required|string|alpha_dash|max:255',
