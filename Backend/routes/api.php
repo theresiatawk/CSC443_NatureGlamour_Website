@@ -22,6 +22,8 @@ use App\Http\Controllers\CommentController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+
 Route::group(["prefix"=> "v0.1"], function(){
     Route::group(["prefix"=> "glamour"], function(){
         Route::controller(AuthController::class)->group(function () {
