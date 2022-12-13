@@ -51,5 +51,12 @@ Route::group(["prefix"=> "v0.1"], function(){
                 Route::get("/{post_id}","getComments");
             });
         });
+        Route::group(["prefix"=> "spots"], function(){
+            Route::controller(SpotController::class)->group(function () {
+                Route::post("/add", "addSpot");
+                Route::get("/delete/{spot_id}", "deleteSpot");
+                Route::get("/{post_id}","getSpots");
+            });
+        });
     });
 });
