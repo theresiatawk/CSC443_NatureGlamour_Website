@@ -51,4 +51,24 @@ class CommentController extends Controller
             ], 200);
         }
     }
+
+    function deleteComment($comment_id){
+        //Check if comment exist
+        $comment = Comment::find($comment_id);
+        if($comment){
+            return response()->json([
+                "status" => "error",
+                "results" => "Comment does not exist"
+            ], 404);
+        }
+        //Delete Comment
+        if($comment->delete()){
+            return response()->json([
+                'status' => 'success',
+                'results' => 'Comment Deleted',
+                'like' => $comment
+            ], 200);
+        }
+    }
+
 }

@@ -47,7 +47,7 @@ Route::group(["prefix"=> "v0.1"], function(){
         Route::group(["prefix"=> "comments"], function(){
             Route::controller(CommentController::class)->group(function () {
                 Route::post("/add", "addComment");
-                Route::post("/delete", "deleteComment");
+                Route::get("/delete/{comment_id}", "deleteComment");
                 Route::get("/{post_id}","getComments");
             });
         });
