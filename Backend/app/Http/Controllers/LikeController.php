@@ -43,7 +43,7 @@ class LikeController extends Controller
         }
         //Check if user already like this post
         $like = Like::where("post_id",$request->post_id)
-                    ->where("user_id",$request->user_id)
+                    ->where("user_id",$user_id)
                     ->get();
         if(count($like) > 0){
             return response()->json([
@@ -53,7 +53,7 @@ class LikeController extends Controller
         }
         // Adding new like
         $like = new Like;
-        $like->user_id = $request->user_id;
+        $like->user_id = $user_id;
         $like->post_id = $request->post_id;
         if($like->save()){
             return response()->json([
@@ -64,7 +64,6 @@ class LikeController extends Controller
     }
     function deleteLike(Request $request){
         $validate = Validator::make($request->all(), [
-            'user_id' => 'required|integer',
             'post_id' => 'required|integer'
         ]);
         if($validate->fails()){
@@ -73,9 +72,11 @@ class LikeController extends Controller
                 "results" => "Some fields are empty"
             ], 400);
         }
+        $user = Auth::user();
+        $user_id = $user->id;
         //Check if like exist
         $like = Like::where("post_id",$request->post_id)
-                    ->where("user_id",$request->user_id)
+                    ->where("user_id",$user_id)
                     ->get();
         if(count($like) == 0){
             return response()->json([
