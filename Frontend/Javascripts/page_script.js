@@ -89,23 +89,23 @@ nature_glamour_pages.load_login = () => {
     login_data.append("password", document.getElementById("password").value);
 
     const response = await nature_glamour_pages.postAPI(login_url, login_data);
+    console.log(response);
     if (response.data.status == "error") {
-        result.innerHTML = `<main id = "response" class="container mt-3">
+      result.innerHTML = `<main id = "response" class="container mt-3">
           <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
         </div></main>`;
-        setTimeout(responseHandler, 2000);
-      }
-      if (response.data.status == "success") {
-        result.innerHTML = `<main id = "response" class="container mt-3">
+      setTimeout(responseHandler, 2000);
+    }
+    if (response.data.status == "success") {
+      result.innerHTML = `<main id = "response" class="container mt-3">
           <div class="alert alert-success alert-dismissible fade show" role="alert">${response.data.results}
         </div></main>`;
-        setTimeout(responseHandler, 2000);
-        // Switching to the stream page
-        setTimeout(function () {
-          window.location.href = "gallery.html";
-        }, 2000);
-      }
-
+      setTimeout(responseHandler, 2000);
+      // Switching to the stream page
+      setTimeout(function () {
+        window.location.href = "gallery.html";
+      }, 2000);
+    }
   };
   login_btn.addEventListener("click", login);
 };

@@ -27,13 +27,13 @@ class AuthController extends Controller
         if (!$token) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Invalid Credentials',
+                'results' => 'Invalid Credentials',
             ]);
         }
         $user = Auth::user();
         return response()->json([
                 'status' => 'success',
-                'results' => 'User logged in successfully',
+                'results' => 'Welcome',
                 'user' => $user,
                 'authorisation' => [
                     'token' => $token,
