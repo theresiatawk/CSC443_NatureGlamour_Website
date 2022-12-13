@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
@@ -20,7 +21,7 @@ class CommentController extends Controller
             return response()->json([
                 "status" => "error",
                 "results" => "Some fields are empty"
-            ], 400);
+            ]);
         }
         $user = Auth::user();
         $user_id = $user->id;
@@ -30,7 +31,7 @@ class CommentController extends Controller
             return response()->json([
                 "status" => "error",
                 "results" => "Invalid Post"
-            ], 401);
+            ]);
         }
         // Adding new Comment
         $comment = new Comment;
@@ -48,12 +49,20 @@ class CommentController extends Controller
 
     function deleteComment($comment_id){
         //Check if comment exist
+        $user = Auth::user();
+        $user_id = $user->id;
         $comment = Comment::find($comment_id);
         if(!$comment){
             return response()->json([
                 "status" => "error",
                 "results" => "Comment does not exist"
-            ], 404);
+            ]);
+        }
+        if($user_id != $comment->user_id){
+            return response()->json([
+                "status" => "error",
+                "results" => "User Not allowed to delete this comment"
+            ]);
         }
         //Delete Comment
         if($comment->delete()){
