@@ -123,7 +123,7 @@ class LikeController extends Controller
             'total' => count($likes)
         ], 200);   
     }
-    function checkLike($user_id, $post_id){
+    function checkLike($post_id){
         //check if like exist
         $like = Like::where('user_id', $user_id)
                     ->where('post_id',$post_id)

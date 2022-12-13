@@ -46,7 +46,7 @@ Route::group(["prefix"=> "v0.1"], function(){
                 Route::group(['middleware'=> 'auth:api'], function(){
                     Route::post("/add", "addLike");
                     Route::post("/delete", "deleteLike");
-                    Route::get("/{user_id}/{post_id}", "checkLike");
+                    Route::get("/check/{post_id}", "checkLike");
                 });
                 Route::get("/{post_id}","getLikes");
             });
