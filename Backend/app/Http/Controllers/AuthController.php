@@ -61,6 +61,15 @@ class AuthController extends Controller
                 "results" => "This username is already registred"
             ]);
         }
+        $validate_email_exist = Validator::make($request->all(), [
+            'email' => 'required|string|regex:/(.+)@(.+)\.(.+)/i|max:255|unique:users',
+        ]);
+        if($validate_email_exist->fails()){
+            return response()->json([
+                "status" => "error",
+                "results" => "This email is already registred"
+            ]);
+        }
         $validate_email = Validator::make($request->all(), [
             'email' => 'required|string|regex:/(.+)@(.+)\.(.+)/i|max:255',
         ]);
@@ -87,7 +96,7 @@ class AuthController extends Controller
         if($user->save()){
             return response()->json([
             'status' => 'success',
-            'results' => 'User created successfully',
+            'results' => 'Account created successfully. You can now login.',
             'user' => $user
         ],200);
         }else{

@@ -67,7 +67,7 @@ nature_glamour_pages.load_register = () => {
       </div></main>`;
       setTimeout(responseHandler, 2000);
       // Switching to the stream page
-      window.location.href = "login.html";
+      setTimeout(function(){window.location.href = "login.html"}, 2000);
     }
   };
   signup_btn.addEventListener("click", signup);
