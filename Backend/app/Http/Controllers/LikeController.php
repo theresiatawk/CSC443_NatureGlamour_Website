@@ -91,6 +91,7 @@ class LikeController extends Controller
         }
     }
     function getLikes($post_id){
+        //Check if post exist
         $post = Post::find($post_id);
         if(!$post){
             return response()->json([
@@ -98,10 +99,11 @@ class LikeController extends Controller
                 "results" => "Post does not exist"
             ], 404);
         }
+        // Get username of likes
         $likes = DB::table('users')
             ->join('likes', 'users.id', '=', 'likes.user_id')
             ->where('likes.post_id', '=', $post_id)
-            ->select('users.email')
+            ->select('users.username')
             ->get();
 
         if(count($likes) == 0){
@@ -119,6 +121,7 @@ class LikeController extends Controller
         ], 200);   
     }
     function checkLike($user_id, $post_id){
+        //check if like exist
         $like = Like::where('user_id', $user_id)
                     ->where('post_id',$post_id)
                     ->get();

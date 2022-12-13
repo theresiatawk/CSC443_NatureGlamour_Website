@@ -55,7 +55,7 @@ class CommentController extends Controller
     function deleteComment($comment_id){
         //Check if comment exist
         $comment = Comment::find($comment_id);
-        if($comment){
+        if(!$comment){
             return response()->json([
                 "status" => "error",
                 "results" => "Comment does not exist"
@@ -70,5 +70,36 @@ class CommentController extends Controller
             ], 200);
         }
     }
+    function getComments($post_id){
+        //Check if post exist
+        $post = Post::find($post_id);
+        if(!$post){
+            return response()->json([
+                "status" => "error",
+                "results" => "Post does not exist"
+            ], 404);
+        }
+        //Getting username with content of each like
+        $comments = DB::table('users')
+            ->join('comments', 'users.id', '=', 'comments.user_id')
+            ->where('likes.post_id', '=', $post_id)
+            ->select('users.username, comments.comment')
+            ->get();
+
+        if(count($comments) == 0){
+            return response()->json([
+                'status' => 'failure',
+                'results' => 'No Comments',
+                'total' => 0
+            ]);
+        }
+        return response()->json([
+            'status' => 'success',
+            'results' => 'Likes',
+            'like' => $comments,
+            'total' => count($comments)
+        ], 200);   
+    }
+    
 
 }
