@@ -82,8 +82,8 @@ class CommentController extends Controller
         //Getting username with content of each like
         $comments = DB::table('users')
             ->join('comments', 'users.id', '=', 'comments.user_id')
-            ->where('likes.post_id', '=', $post_id)
-            ->select('users.username, comments.comment')
+            ->where('comments.post_id', '=', $post_id)
+            ->select('users.username', 'comments.comment')
             ->get();
 
         if(count($comments) == 0){
@@ -100,6 +100,5 @@ class CommentController extends Controller
             'total' => count($comments)
         ], 200);   
     }
-    
 
 }
