@@ -124,6 +124,8 @@ class LikeController extends Controller
         ], 200);   
     }
     function checkLike($post_id){
+        $user = Auth::user();
+        $user_id = $user->id;
         //check if like exist
         $like = Like::where('user_id', $user_id)
                     ->where('post_id',$post_id)

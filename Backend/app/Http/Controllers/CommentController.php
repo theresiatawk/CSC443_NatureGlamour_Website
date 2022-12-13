@@ -13,7 +13,6 @@ class CommentController extends Controller
 {
     function addComment(Request $request){
         $validate = Validator::make($request->all(), [
-            'user_id' => 'required|integer',
             'post_id' => 'required|integer',
             'comment' => 'required|string'
         ]);
@@ -23,15 +22,10 @@ class CommentController extends Controller
                 "results" => "Some fields are empty"
             ], 400);
         }
-        //Check if user and post exists
-        $user = User::find($request->user_id);
+        $user = Auth::user();
+        $user_id = $user->id;
+        //Check if post exists
         $post = Post::find($request->post_id);
-        if(!$user){
-            return response()->json([
-                "status" => "error",
-                "results" => "Invalid User"
-            ], 401);
-        }
         if(!$post){
             return response()->json([
                 "status" => "error",
@@ -40,7 +34,7 @@ class CommentController extends Controller
         }
         // Adding new Comment
         $comment = new Comment;
-        $comment->user_id = $request->user_id;
+        $comment->user_id = $user_id;
         $comment->post_id = $request->post_id;
         $comment->comment = $request->comment;
         if($comment->save()){
