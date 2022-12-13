@@ -20,7 +20,7 @@ class AuthController extends Controller
             return response()->json([
                 "status" => "error",
                 "results" => "Some fields are empty"
-            ], 400);
+            ]);
         }
         $credentials = $request->only('email', 'password');
         $token = Auth::attempt($credentials);
@@ -28,7 +28,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Invalid Credentials',
-            ], 401);
+            ]);
         }
         $user = Auth::user();
         return response()->json([
@@ -44,13 +44,13 @@ class AuthController extends Controller
 
     function register(Request $request){
         $validate_username = Validator::make($request->all(), [
-            'username' => 'required|string|alpha_dash|max:255|unique:users',
+            'username' => 'required|string|alpha_dash|max:255',
         ]);
         if($validate_username->fails()){
             return response()->json([
                 "status" => "error",
-                "results" => "Username must contain letters, numbers, dashes and underscores and NOT space"
-            ], 400);
+                "results" => "Username must contain letters, numbers, dashes and NOT space"
+            ]);
         }
         $validate_username_exist = Validator::make($request->all(), [
             'username' => 'required|string|alpha_dash|max:255|unique:users',
@@ -59,16 +59,16 @@ class AuthController extends Controller
             return response()->json([
                 "status" => "error",
                 "results" => "This username is already registred"
-            ], 400);
+            ]);
         }
         $validate_email = Validator::make($request->all(), [
-            'email' => 'required|string|regex:/(.+)@(.+)\.(.+)/i|max:255|unique:users',
+            'email' => 'required|string|regex:/(.+)@(.+)\.(.+)/i|max:255',
         ]);
         if($validate_email->fails()){
             return response()->json([
                 "status" => "error",
                 "results" => "Invalid email format"
-            ], 400);
+            ]);
         }
         $validate_password = Validator::make($request->all(), [
             'password' => 'required|string|min:8', 
@@ -77,7 +77,7 @@ class AuthController extends Controller
             return response()->json([
                 "status" => "error",
                 "results" => "Password must contain at least 8 characters"
-            ], 400);
+            ]);
         }
         $user = new User;
         $user->username = $request->username;
@@ -85,21 +85,16 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
 
         if($user->save()){
-            $token = Auth::login($user);
             return response()->json([
             'status' => 'success',
             'results' => 'User created successfully',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
+            'user' => $user
         ],200);
         }else{
             return response()->json([
                 "status" => "error",
                 "results" => []
-            ], 400);
+            ]);
         }
     }
     function logout(){

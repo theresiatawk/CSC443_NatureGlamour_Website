@@ -36,21 +36,39 @@ nature_glamour_pages.getAPI = async (api_url) => {
   }
 };
 nature_glamour_pages.load_register = () => {
-    const signup_btn = document.getElementById("register");
-    const result = document.getElementById("response");
-  
-    const signup = async () => {
-      const signup_url = base_url + "signup";
-  
-      const signup_data = new URLSearchParams();
-      signup_data.append("useranme", document.getElementById("username").value);
-      signup_data.append("email", document.getElementById("email").value);
-      signup_data.append("password", document.getElementById("password").value);
-  
-      const response = await nature_glamour_pages.postAPI(
-        signup_url,
-        signup_data
-      );
-      console.log(response);
-    };
-}
+  const signup_btn = document.getElementById("register");
+  const result = document.getElementById("response");
+
+  const responseHandler = () => {
+    result.innerHTML = `<main id = "response" class="container mt-3">`;
+  };
+
+  const signup = async () => {
+    const signup_url = base_url + "signup";
+
+    const signup_data = new URLSearchParams();
+    signup_data.append("username", document.getElementById("username").value);
+    signup_data.append("email", document.getElementById("email").value);
+    signup_data.append("password", document.getElementById("password").value);
+
+    const response = await nature_glamour_pages.postAPI(
+      signup_url,
+      signup_data
+    );
+    if (response.data.status == "error") {
+      result.innerHTML = `<main id = "response" class="container mt-3">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
+      </div></main>`;
+      setTimeout(responseHandler, 2000);
+    }
+    if (response.data.status == "success") {
+      result.innerHTML = `<main id = "response" class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">${response.data.results}
+      </div></main>`;
+      setTimeout(responseHandler, 2000);
+      // Switching to the stream page
+      window.location.href = "login.html";
+    }
+  };
+  signup_btn.addEventListener("click", signup);
+};
