@@ -6,8 +6,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes

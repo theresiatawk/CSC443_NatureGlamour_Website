@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Like;
@@ -15,7 +16,6 @@ class LikeController extends Controller
 {
     function addLike(Request $request){
         $validate = Validator::make($request->all(), [
-            'user_id' => 'required|integer',
             'post_id' => 'required|integer'
         ]);
         if($validate->fails()){
@@ -24,8 +24,10 @@ class LikeController extends Controller
                 "results" => "Some fields are empty"
             ], 400);
         }
+        $user = Auth::user();
+        $user_id = $user->id;
         //Check if user and post exists
-        $user = User::find($request->user_id);
+        $user = User::find($user_id);
         $post = Post::find($request->post_id);
         if(!$user){
             return response()->json([
