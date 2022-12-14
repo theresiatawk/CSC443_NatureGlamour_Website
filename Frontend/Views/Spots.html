@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NatureGlamour</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../Stylesheets/app.css" />
+  </head>
+
+  <body class="main-container">
+    <nav class="navbar nav-bar navbar-expand-lg navbar-dark">
+      <div class="container-fluidd">
+        <a class="navbar-brandd" href="#">NatureGlamour</a>
+        <button
+          class="navbar-togglerr"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-iconn"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-linkk" href="/">Home</a>
+            <a class="nav-linkk" href="">Spots</a>
+            <a class="nav-linkk" href="/campgrounds/new">Gallery</a>
+          </div>
+          <div class="navbar-nav ml-auto">
+            
+                <!-- <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/register">Register</a>
+                <a class="nav-link" href="/logout">Logout</a> -->
+                
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- <main class="container mt-3"></main> -->
+    <div
+      class="card-container"
+    >
+      <div class="raw">
+        <div class="sub-container">
+          <div class="card-content">
+            <img
+              src="../Utils/login-img.png"
+              alt=""
+              class="card-img"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Login</h5>
+              <form
+                action="/login"
+                method="POST"
+                novalidate
+              >
+                <div class="input">
+                  <label class="form-label" for="username">Username</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="username"
+                    name="username"
+                    autofocus
+                    required
+                  />
+                  <div class="valid-feedback">Looks good!</div>
+                </div>
+
+                <div class="input">
+                  <label class="form-label" for="password">Password</label>
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                  />
+                  <div class="valid-feedback">Looks good!</div>
+                </div>
+                <button class="btn">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer"></footer>
+  </body>
+</html>
