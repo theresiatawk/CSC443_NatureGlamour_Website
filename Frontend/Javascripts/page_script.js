@@ -43,6 +43,14 @@ nature_glamour_pages.load_register = () => {
   const responseHandler = () => {
     result.innerHTML = `<main id = "response" class="container mt-3">`;
   };
+  const iconHandler = () => {
+    const nav = document.getElementById("myTopnav");
+    if (nav.className === "topnav") {
+      nav.className += " responsive";
+    } else {
+      nav.className = "topnav";
+    }
+  };
 
   const signup = async () => {
     const signup_url = base_url + "signup";
@@ -74,6 +82,8 @@ nature_glamour_pages.load_register = () => {
     }
   };
   signup_btn.addEventListener("click", signup);
+  icon.addEventListener("click", iconHandler);
+
 };
 nature_glamour_pages.load_login = () => {
   const login_btn = document.getElementById("login");
@@ -90,7 +100,7 @@ nature_glamour_pages.load_login = () => {
     } else {
       nav.className = "topnav";
     }
-  }
+  };
   const login = async () => {
     const login_url = base_url + "login";
 
