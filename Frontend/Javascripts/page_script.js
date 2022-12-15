@@ -38,6 +38,7 @@ nature_glamour_pages.getAPI = async (api_url) => {
 nature_glamour_pages.load_register = () => {
   const signup_btn = document.getElementById("register");
   const result = document.getElementById("response");
+  const icon = document.getElementById("icon");
 
   const responseHandler = () => {
     result.innerHTML = `<main id = "response" class="container mt-3">`;

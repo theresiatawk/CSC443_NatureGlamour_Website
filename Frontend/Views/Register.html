@@ -4,10 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NatureGlamour</title>
-
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Stylesheets/app.css" />
   </head>
 
@@ -15,36 +11,18 @@
     <nav class="navbar nav-bar navbar-expand-lg navbar-dark">
       <div class="container-fluidd">
         <a class="navbar-brandd" href="#">NatureGlamour</a>
-        <button
-          class="navbar-togglerr"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-iconn"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-linkk" href="/">Home</a>
-            <a class="nav-linkk" href="">Spots</a>
-            <a class="nav-linkk" href="/campgrounds/new">Gallery</a>
-          </div>
-          <div class="navbar-nav ml-auto">
-                <!-- <a class="nav-link" href="/login">Login</a>
-                <a class="nav-link" href="/register">Register</a>
-                <a class="nav-link" href="/logout">Logout</a> -->    
-          </div>
+        <div class="navbar-nav">
+          <div class="topnav" id="myTopnav">
+            <a href="./home.html" >Home</a>
+            <a href="./spots.html">Spots</a>
+            <a href="./gallery.html">Gallery</a>
+            <a href="./login.html">Login</a>
+            <a id = icon class=" icon navbar-toggler-iconn"></a>
+        </div>
         </div>
       </div>
     </nav>
-    </div>
-    </main>
-    <div
-      class="card-container"
-    >
+    <div class="card-container">
       <div class="raw">
         <div class="sub-container">
           <div class="card-content">
@@ -93,10 +71,14 @@
                   <div class="valid-feedback">Looks good!</div>
                 </div>
                 <button id = "register" class="btn">Register</button>
+                <label class="small-text">Already have an account</label>
+              <a href="./register.html" id="register" class="register-link"
+                ><b>Login?</b></a
+              ><br />
             </div>
           </div>
         </div>
-        <main id = "response" class="container mt-3">
+        <main id = "response" class="container response">
       </div>
     </div>
     <footer class="footer"></footer>
