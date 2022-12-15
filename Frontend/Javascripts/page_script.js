@@ -56,13 +56,13 @@ nature_glamour_pages.load_register = () => {
       signup_data
     );
     if (response.data.status == "error") {
-      result.innerHTML = `<main id = "response" class="container mt-3">
+      result.innerHTML = `<main id = "response" class="container response">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
       </div></main>`;
       setTimeout(responseHandler, 2000);
     }
     if (response.data.status == "success") {
-      result.innerHTML = `<main id = "response" class="container mt-3">
+      result.innerHTML = `<main id = "response" class="container response">
         <div class="alert alert-success alert-dismissible fade show" role="alert">${response.data.results}
       </div></main>`;
       setTimeout(responseHandler, 2000);
