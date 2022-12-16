@@ -146,7 +146,7 @@ nature_glamour_pages.load_gallery = () => {
     let spots_list = `<div id = "allSpots">`;
     if (response.data.status == "error") {
       result.innerHTML = `<main id = "response" class="container mt-3">
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">No Spots
         </div></main>`;
     }
     if (response.data.status == "success") {
@@ -221,7 +221,7 @@ nature_glamour_pages.load_reviews = () => {
 
     if (response.data.status == "error") {
       result.innerHTML = `<main id = "response" class="container mt-3">
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">No Reviews
         </div></main>`;
     }
     if (response.data.status == "success") {
