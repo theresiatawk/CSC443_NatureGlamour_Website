@@ -117,6 +117,13 @@ nature_glamour_pages.load_login = () => {
       setTimeout(responseHandler, 2000);
     }
     if (response.data.status == "success") {
+      const userData = [];
+      const user_id = response.data.user.id;
+      const username = response.data.user.username;
+      const user_email = response.data.user.email;
+      const access_token = response.data.authorization.token;
+      userData.push({ user_id, username, user_email, access_token});
+      localStorage.setItem("userData", JSON.stringify(userData));
       result.innerHTML = `<main id = "response" class="container mt-3">
           <div class="alert alert-success alert-dismissible fade show" role="alert">${response.data.results}
         </div></main>`;
@@ -130,3 +137,7 @@ nature_glamour_pages.load_login = () => {
   login_btn.addEventListener("click", login);
   icon.addEventListener("click", iconHandler);
 };
+nature_glamour_pages.load_login = () => {
+
+};
+
