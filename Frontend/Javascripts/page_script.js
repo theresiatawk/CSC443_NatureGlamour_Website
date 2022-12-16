@@ -203,38 +203,62 @@ nature_glamour_pages.load_gallery = () => {
       spots_list += `</div>`;
       all_spots.innerHTML = spots_list;
     }
-  }; 
-  getSpots();
-  const like_icons = document.querySelectorAll(".heart-img");
-  const likeImageHandler = async (e) => {
-    const image_id = e.target.parentElement.id;
-    const like_image_url =
-      base_url + "add_like.php?user_id=" + user_id + "&image_id=" + image_id;
-    const delete_like_url =
-      base_url + "delete_like.php?user_id=" + user_id + "&image_id=" + image_id;
-    if (e.srcElement.attributes[1].value == "./Assets/full_heart.png") {
-      e.srcElement.attributes[1].value = "./Assets/empty_heart.png";
-      const response = await instagram_like_pages.getAPI(delete_like_url);
-      if (response.data.Error) {
-        console.log(response.data);
-      } else {
-        console.log(response.data);
+  };
+  const getIcons = async () => {
+    const result = await getSpots();
+    const user = JSON.parse(localStorage.getItem("userData"));
+    const user_id = user[0].user_id;
+    const like_icons = document.querySelectorAll(".heart-img");
+    like_icons.forEach(async (element) => {
+      console.log(element);
+      console.log(element.getAttribute('src'));
+      const spot_id = element.parentElement.id;
+      const check_like_url = base_url + "likes/check/"+ user_id + "/"+ spot_id;
+      const response = await nature_glamour_pages.getAPI(check_like_url);
+      element.src.value = "../Utils/full_heart.png";
+      if(response.data.results == "true"){
+        element.src = "../Utils/full_heart.png";
       }
+
+    });
+    return like_icons;
+  };
+  const likeSpotHandler = async (e) => {
+    const spot_id = e.target.parentElement.id;
+    const user = JSON.parse(localStorage.getItem("userData"));
+    const user_id = user[0].user_id;
+    const token = user[0].access_token;
+    const like_spot_url = base_url + "likes/add";
+    const delete_like_url = base_url + "likes/delete";
+    const like_data = new URLSearchParams();
+    like_data.append("post_id", spot_id);
+    like_data.append("user_id", user_id);
+
+    if (e.srcElement.attributes[1].value == "../Utils/full_heart.png") {
+      e.srcElement.attributes[1].value = "../Utils/empty_heart.png";
+      const response = await nature_glamour_pages.securePostAPI(
+        delete_like_url,
+        like_data,
+        token
+      );
     } else {
-      e.srcElement.attributes[1].value = "./Assets/full_heart.png";
-      const response = await instagram_like_pages.getAPI(like_image_url);
-      if (response.data.Error) {
-        console.log(response.data);
-      } else {
-        console.log(response.data);
-      }
+      e.srcElement.attributes[1].value = "../Utils/full_heart.png";
+      const response = await nature_glamour_pages.securePostAPI(
+        like_spot_url,
+        like_data,
+        token
+      );
     }
   };
-  like_icons.forEach((b) => b.addEventListener("click", likeImageHandler));
+  const listen = async () => {
+    const like_icons = await getIcons();
+    like_icons.forEach((b) => b.addEventListener("click", likeSpotHandler));
+  };
+  listen();
 };
 nature_glamour_pages.load_reviews = () => {
   const result = document.getElementById("response");
-  const add_review = document.getElementById("addReview"); 
+  const add_review = document.getElementById("addReview");
   const getUrlVars = () => {
     const vars = {};
     const parts = window.location.href.replace(
@@ -287,7 +311,7 @@ nature_glamour_pages.load_reviews = () => {
 
     const response = await nature_glamour_pages.securePostAPI(
       add_review_url,
-      review_data, 
+      review_data,
       token
     );
     if (response.data.status == "error") {
@@ -302,8 +326,7 @@ nature_glamour_pages.load_reviews = () => {
       </div></main>`;
       setTimeout(responseHandler, 2000);
     }
-
-  }
+  };
   getReviews();
   add_review.addEventListener("click", addReview);
 };
