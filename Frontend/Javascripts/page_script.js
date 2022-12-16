@@ -127,9 +127,9 @@ nature_glamour_pages.load_login = () => {
         </div></main>`;
       setTimeout(responseHandler, 2000);
       // Switching to the stream page
-      setTimeout(function () {
-        window.location.href = "gallery.html";
-      }, 2000);
+      // setTimeout(function () {
+      //   window.location.href = "gallery.html";
+      // }, 2000);
     }
   };
   login_btn.addEventListener("click", login);
@@ -150,8 +150,37 @@ nature_glamour_pages.load_gallery = () => {
       setTimeout(responseHandler, 2000);
     }
     if (response.data.status == "success"){
+      const all_spots = document.getElementById("allSpots");
       const spots = response.data.posts;
-      
+      let spots_list = `<div id = "allSpots">`;
+      spots.map((spot, i) =>
+      (spots_list += `
+      <div id = ${spot.id} class="container">
+        <div class="card">
+          <div class="row">
+            <div class="col-md-4">
+                <img class="img-fluid" alt=""
+                    src="${spot.url}">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">${spot.username}</h5>
+                <p class="card-text"></p>
+                <p class="card-text">
+                  <small class="text-muted">location</small>
+                </p>
+                <div class="flex-row">
+                  <img class="heart-img" src="../Utils/empty_heart.png">
+                  <p class="like-text">22</p>
+                </div>
+                <a id = ${spot.id} href = "./reviews.html" class="btn">+Review</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`)); 
+      spots.list += `</div>`;
+      all_spots.innerHTML = spots_list;  
     }
     
   };
