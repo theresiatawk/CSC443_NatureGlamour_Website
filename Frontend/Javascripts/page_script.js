@@ -330,3 +330,6 @@ nature_glamour_pages.load_reviews = () => {
   getReviews();
   add_review.addEventListener("click", addReview);
 };
+nature_glamour_pages.load_add_spot = () => {
+  
+};
