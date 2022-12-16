@@ -26,11 +26,23 @@ Password in order to access the website contents.
 
 ---
 
+
+#### Features:
+* Users can upload spots in nature
+* Users can review spots once, and see others reviews
+* User profiles include username, email, password and join date)
+
+---
+
 #### Database Design:
 
-
-
+![](./Resources/er-diagram.png)
 
 ---
 
 #### Screenshots:
+
+![](./Resources/home.png)
+
+![](./Resources/gallery.png)
+
