@@ -28,6 +28,17 @@ nature_glamour_pages.postAPI = async (api_url, api_data, api_token = null) => {
     nature_glamour_pages.Console("Error from Linking (POST)", error);
   }
 };
+nature_glamour_pages.securePostAPI = async (api_url, api_data, api_token) => {
+  try {
+    return await axios.post(api_url, api_data, {
+      headers: {
+        Authorization: "Bearer " + api_token,
+      },
+    });
+  } catch (error) {
+    nature_glamour_pages.Console("Error from Linking (POST)", error);
+  }
+};
 nature_glamour_pages.getAPI = async (api_url) => {
   try {
     return await axios(api_url);
@@ -192,11 +203,12 @@ nature_glamour_pages.load_gallery = () => {
       spots_list += `</div>`;
       all_spots.innerHTML = spots_list;
     }
-  };
+  }; 
   getSpots();
 };
 nature_glamour_pages.load_reviews = () => {
   const result = document.getElementById("response");
+  const add_review = document.getElementById("addReview"); 
   const getUrlVars = () => {
     const vars = {};
     const parts = window.location.href.replace(
@@ -207,13 +219,16 @@ nature_glamour_pages.load_reviews = () => {
     );
     return vars;
   };
+  const responseHandler = () => {
+    result.innerHTML = `<main id = "response" class="container mt-3">`;
+  };
+  const clicked_spot_id = getUrlVars()["spot"];
+
   const getReviews = async () => {
-    const clicked_spot_id = getUrlVars()["spot"];
     const get_reviews_url = base_url + "comments/" + clicked_spot_id;
     const response = await nature_glamour_pages.getAPI(get_reviews_url);
     const all_reviews = document.getElementById("allReviews");
     let reviews_list = `<div id = "allReviews">`;
-
     if (response.data.status == "error") {
       result.innerHTML = `<main id = "response" class="container mt-3">
           <div class="alert alert-success alert-dismissible fade show" role="alert">No Reviews
@@ -234,5 +249,35 @@ nature_glamour_pages.load_reviews = () => {
     reviews_list += `</div>`;
     all_reviews.innerHTML = reviews_list;
   };
+  const addReview = async () => {
+    const add_review_url = base_url + "comments/add";
+    const review_data = new URLSearchParams();
+    const user = JSON.parse(localStorage.getItem("userData"));
+    const user_id = user[0].user_id;
+    const token = user[0].access_token;
+    review_data.append("post_id", clicked_spot_id);
+    review_data.append("user_id", user_id);
+    review_data.append("comment", document.getElementById("reviewBody").value);
+
+    const response = await nature_glamour_pages.securePostAPI(
+      add_review_url,
+      review_data, 
+      token
+    );
+    if (response.data.status == "error") {
+      result.innerHTML = `<main id = "response" class="container response">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
+      </div></main>`;
+      setTimeout(responseHandler, 2000);
+    }
+    if (response.data.status == "success") {
+      result.innerHTML = `<main id = "response" class="container response">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">${response.data.results}
+      </div></main>`;
+      setTimeout(responseHandler, 2000);
+    }
+
+  }
   getReviews();
+  add_review.addEventListener("click", addReview);
 };
