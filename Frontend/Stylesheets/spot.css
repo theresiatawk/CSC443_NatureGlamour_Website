@@ -4,12 +4,22 @@ h1 {
   font-weight: 500;
   line-height: 1.2;
 }
+h2 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
 
 @media (min-width: 1200px) {
   h1 {
     font-size: 2.5rem;
   }
+  h2 {
+    font-size: 2rem;
+  }
 }
+
 
 .container {
   width: 100%;

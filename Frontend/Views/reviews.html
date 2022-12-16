@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NatureGlamour</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.css" />
     <link rel="stylesheet" href="../Stylesheets/app.css" />
     <link rel="stylesheet" href="../Stylesheets/spot.css" />
   </head>
@@ -24,7 +25,28 @@
       </div>
     </nav>
     <div class="container">
-
+        <div class = "row">
+            <div class="col-6">
+                <div id='map' ></div>
+                <h2>Leave a Review</h2>
+                    <div class="margin-bttm">
+                        <label class="form-label" for="body">Review Text</label>
+                        <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <button class="btn btn-success">Submit</button>
+                    <h2>Spot Reviews</h2>
+                <div class="card mb-3 ">
+                    <div class="card-body">
+                        <h5 class="card-title">author</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username%></h6>
+                        <p class="card-text">Review: = review.body %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <footer class="footer"></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
