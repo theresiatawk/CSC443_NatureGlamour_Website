@@ -177,7 +177,7 @@ nature_glamour_pages.load_gallery = () => {
                 <p class="card-text">
                   <small class="text-muted">location</small>
                 </p>
-                <div class="flex-row">
+                <div id = ${spot.id} class="flex-row">
                   <img class="heart-img" src="../Utils/empty_heart.png">
                   <p class="like-text">
                   ${
@@ -205,6 +205,32 @@ nature_glamour_pages.load_gallery = () => {
     }
   }; 
   getSpots();
+  const like_icons = document.querySelectorAll(".heart-img");
+  const likeImageHandler = async (e) => {
+    const image_id = e.target.parentElement.id;
+    const like_image_url =
+      base_url + "add_like.php?user_id=" + user_id + "&image_id=" + image_id;
+    const delete_like_url =
+      base_url + "delete_like.php?user_id=" + user_id + "&image_id=" + image_id;
+    if (e.srcElement.attributes[1].value == "./Assets/full_heart.png") {
+      e.srcElement.attributes[1].value = "./Assets/empty_heart.png";
+      const response = await instagram_like_pages.getAPI(delete_like_url);
+      if (response.data.Error) {
+        console.log(response.data);
+      } else {
+        console.log(response.data);
+      }
+    } else {
+      e.srcElement.attributes[1].value = "./Assets/full_heart.png";
+      const response = await instagram_like_pages.getAPI(like_image_url);
+      if (response.data.Error) {
+        console.log(response.data);
+      } else {
+        console.log(response.data);
+      }
+    }
+  };
+  like_icons.forEach((b) => b.addEventListener("click", likeImageHandler));
 };
 nature_glamour_pages.load_reviews = () => {
   const result = document.getElementById("response");
