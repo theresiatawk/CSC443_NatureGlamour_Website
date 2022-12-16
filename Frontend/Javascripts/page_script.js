@@ -127,9 +127,9 @@ nature_glamour_pages.load_login = () => {
         </div></main>`;
       setTimeout(responseHandler, 2000);
       // Switching to the stream page
-      // setTimeout(function () {
-      //   window.location.href = "gallery.html";
-      // }, 2000);
+      setTimeout(function () {
+        window.location.href = "gallery.html";
+      }, 2000);
     }
   };
   login_btn.addEventListener("click", login);
@@ -160,7 +160,7 @@ nature_glamour_pages.load_gallery = () => {
           <div class="row">
             <div class="col-md-4">
                 <img class="img-fluid" alt=""
-                    src="${spot.url}">
+                    src="../../Backend/storage/app/public/posts/${spot.url}">
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -181,8 +181,7 @@ nature_glamour_pages.load_gallery = () => {
       </div>`)); 
       spots.list += `</div>`;
       all_spots.innerHTML = spots_list;  
-    }
-    
+    } 
   };
   getSpots();
 };
