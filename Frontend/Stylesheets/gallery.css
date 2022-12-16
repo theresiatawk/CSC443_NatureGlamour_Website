@@ -88,17 +88,8 @@
   cursor: pointer;
   user-select: none;
   margin:1rem;
-  width: 5%;
-  height:  5%;
-}
-.heart-img {
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  margin:1rem;
-  width: 5%;
-  height:  5%;
-  background-image: url("../Utils/");
+  width: 4%;
+  height:  4%;
 }
 .btn {  
   font-weight: 300;
