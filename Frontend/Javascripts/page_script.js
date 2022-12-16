@@ -28,8 +28,6 @@ nature_glamour_pages.postAPI = async (api_url, api_data, api_token = null) => {
     nature_glamour_pages.Console("Error from Linking (POST)", error);
   }
 };
-<<<<<<< HEAD
-=======
 nature_glamour_pages.securePostAPI = async (api_url, api_data, api_token) => {
   try {
     return await axios.post(api_url, api_data, {
@@ -41,7 +39,6 @@ nature_glamour_pages.securePostAPI = async (api_url, api_data, api_token) => {
     nature_glamour_pages.Console("Error from Linking (POST)", error);
   }
 };
->>>>>>> frontend
 nature_glamour_pages.getAPI = async (api_url) => {
   try {
     return await axios(api_url);
@@ -52,16 +49,11 @@ nature_glamour_pages.getAPI = async (api_url) => {
 nature_glamour_pages.load_register = () => {
   const signup_btn = document.getElementById("register");
   const result = document.getElementById("response");
-<<<<<<< HEAD
-=======
   const icon = document.getElementById("icon");
->>>>>>> frontend
 
   const responseHandler = () => {
     result.innerHTML = `<main id = "response" class="container mt-3">`;
   };
-<<<<<<< HEAD
-=======
   const iconHandler = () => {
     const nav = document.getElementById("myTopnav");
     if (nav.className === "topnav") {
@@ -70,7 +62,6 @@ nature_glamour_pages.load_register = () => {
       nav.className = "topnav";
     }
   };
->>>>>>> frontend
 
   const signup = async () => {
     const signup_url = base_url + "signup";
@@ -85,21 +76,13 @@ nature_glamour_pages.load_register = () => {
       signup_data
     );
     if (response.data.status == "error") {
-<<<<<<< HEAD
-      result.innerHTML = `<main id = "response" class="container mt-3">
-=======
       result.innerHTML = `<main id = "response" class="container response">
->>>>>>> frontend
         <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
       </div></main>`;
       setTimeout(responseHandler, 2000);
     }
     if (response.data.status == "success") {
-<<<<<<< HEAD
-      result.innerHTML = `<main id = "response" class="container mt-3">
-=======
       result.innerHTML = `<main id = "response" class="container response">
->>>>>>> frontend
         <div class="alert alert-success alert-dismissible fade show" role="alert">${response.data.results}
       </div></main>`;
       setTimeout(responseHandler, 2000);
@@ -110,27 +93,16 @@ nature_glamour_pages.load_register = () => {
     }
   };
   signup_btn.addEventListener("click", signup);
-<<<<<<< HEAD
-=======
   icon.addEventListener("click", iconHandler);
->>>>>>> frontend
 };
 nature_glamour_pages.load_login = () => {
   const login_btn = document.getElementById("login");
   const result = document.getElementById("response");
-<<<<<<< HEAD
-=======
   const icon = document.getElementById("icon");
->>>>>>> frontend
 
   const responseHandler = () => {
     result.innerHTML = `<main id = "response" class="container mt-3">`;
   };
-<<<<<<< HEAD
-  const login = async () => {
-    const login_url = base_url + "login";
-
-=======
   const iconHandler = () => {
     const nav = document.getElementById("myTopnav");
     if (nav.className === "topnav") {
@@ -141,16 +113,11 @@ nature_glamour_pages.load_login = () => {
   };
   const login = async () => {
     const login_url = base_url + "login";
->>>>>>> frontend
     const login_data = new URLSearchParams();
     login_data.append("email", document.getElementById("email").value);
     login_data.append("password", document.getElementById("password").value);
 
     const response = await nature_glamour_pages.postAPI(login_url, login_data);
-<<<<<<< HEAD
-    console.log(response);
-=======
->>>>>>> frontend
     if (response.data.status == "error") {
       result.innerHTML = `<main id = "response" class="container mt-3">
           <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
@@ -158,8 +125,6 @@ nature_glamour_pages.load_login = () => {
       setTimeout(responseHandler, 2000);
     }
     if (response.data.status == "success") {
-<<<<<<< HEAD
-=======
       const userData = [];
       const user_id = response.data.user.id;
       const username = response.data.user.username;
@@ -167,15 +132,11 @@ nature_glamour_pages.load_login = () => {
       const access_token = response.data.authorisation.token;
       userData.push({ user_id, username, user_email, access_token });
       localStorage.setItem("userData", JSON.stringify(userData));
->>>>>>> frontend
       result.innerHTML = `<main id = "response" class="container mt-3">
           <div class="alert alert-success alert-dismissible fade show" role="alert">${response.data.results}
         </div></main>`;
       setTimeout(responseHandler, 2000);
-<<<<<<< HEAD
-=======
       console.log(access_token);
->>>>>>> frontend
       // Switching to the stream page
       setTimeout(function () {
         window.location.href = "gallery.html";
@@ -183,8 +144,6 @@ nature_glamour_pages.load_login = () => {
     }
   };
   login_btn.addEventListener("click", login);
-<<<<<<< HEAD
-=======
   icon.addEventListener("click", iconHandler);
 };
 nature_glamour_pages.load_gallery = () => {
@@ -388,7 +347,22 @@ nature_glamour_pages.load_add_spot = () => {
       add_spot_url,
       spot_data
     );
+    if (response.data.status == "error") {
+      result.innerHTML = `<main id = "response" class="container response">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
+      </div></main>`;
+      setTimeout(responseHandler, 2000);
+    }
+    if (response.data.status == "success") {
+      result.innerHTML = `<main id = "response" class="container response">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">${response.data.results}
+      </div></main>`;
+      setTimeout(responseHandler, 2000);
+      // Switching to the stream page
+      setTimeout(function () {
+        window.location.href = "login.html";
+      }, 2000);
+    }
   };
   add_post.addEventListener("click", addSpot);
->>>>>>> frontend
 };
