@@ -58,6 +58,7 @@
   .container {
     max-width: 720px;
   }
+
 }
 
 @media (min-width: 992px) {
@@ -76,5 +77,55 @@
   .container {
     max-width: 1320px;
   }
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  /* overflow: hidden; add this to contain floated children */
+}
+.heart-img {
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  margin:1rem;
+  width: 5%;
+  height:  5%;
+}
+.heart-img {
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  margin:1rem;
+  width: 5%;
+  height:  5%;
+  background-image: url("../Utils/");
+}
+.btn {  
+  font-weight: 300;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #495057;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  color: #fff;
+  background-color: #495057;
+  width: 30%;
+  float: right;
+  margin : 1rem;
+}
+.btn:hover {
+  color: #fff;
+  background-color: #6e747a;
+  border-color: #6b747d;
+}
+.like-text {
+  font-weight: 100;
+  font-size:small;
+  margin-top:1.5rem;
+  align-items: flex-end;
 }
 
