@@ -286,6 +286,7 @@ body::-webkit-scrollbar {
   background-color: #343a40;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  margin-top: auto;
 }
 .topnav {
   overflow: hidden;

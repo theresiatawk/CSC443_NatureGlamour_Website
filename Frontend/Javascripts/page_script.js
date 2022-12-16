@@ -135,27 +135,26 @@ nature_glamour_pages.load_login = () => {
   icon.addEventListener("click", iconHandler);
 };
 nature_glamour_pages.load_gallery = () => {
+  const result = document.getElementById("response");
   const responseHandler = () => {
     result.innerHTML = `<main id = "response" class="container mt-3">`;
   };
   const getSpots = async () => {
-    const result = document.getElementById("response");
     const get_spots_url = base_url + "posts";
     const response = await nature_glamour_pages.getAPI(get_spots_url);
-    if (response.data.status == "error"){
+    const all_spots = document.getElementById("allSpots");
+    let spots_list = `<div id = "allSpots">`;
+    if (response.data.status == "error") {
       result.innerHTML = `<main id = "response" class="container mt-3">
           <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
         </div></main>`;
-      setTimeout(responseHandler, 2000);
     }
-    if (response.data.status == "success"){
-      const all_spots = document.getElementById("allSpots");
+    if (response.data.status == "success") {
       const spots = response.data.posts;
-  
-      let spots_list = `<div id = "allSpots">`;
-      spots.map((spot, i) =>
-      (spots_list += 
-      `<div id = ${spot.id} class="container">
+      const likes = response.data.likes;
+      spots.map(
+        (spot, i) =>
+          (spots_list += `<div id = ${spot.id} class="container">
         <div class="card">
           <div class="row">
             <div class="col-md-4">
@@ -171,18 +170,74 @@ nature_glamour_pages.load_gallery = () => {
                 </p>
                 <div class="flex-row">
                   <img class="heart-img" src="../Utils/empty_heart.png">
-                  <p class="like-text">${all_likes}</p>
+                  <p class="like-text">
+                  ${
+                    likes.findIndex((element) => element.post_id == spot.id) !=
+                    -1
+                      ? likes[
+                          likes.findIndex(
+                            (element) => element.post_id == spot.id
+                          )
+                        ].likes_count
+                      : 0
+                  }</p>
                 </div>
-                <a id = ${spot.id} href = "./reviews.html" class="btn">+Review</a>
+                <a id = ${spot.id} href = "./reviews.html?spot=${
+            spot.id
+          }" class="btn Review">+Review</a>
               </div>
             </div>
           </div>
         </div>
-      </div>`)); 
-      spots.list += `</div>`;
-      all_spots.innerHTML = spots_list;  
-    } 
+      </div>`)
+      );
+      spots_list += `</div>`;
+      all_spots.innerHTML = spots_list;
+    }
   };
   getSpots();
 };
+nature_glamour_pages.load_reviews = () => {
+  const result = document.getElementById("response");
+  const getUrlVars = () => {
+    const vars = {};
+    const parts = window.location.href.replace(
+      /[?&]+([^=&]+)=([^&]*)/gi,
+      function (m, key, value) {
+        vars[key] = value;
+      }
+    );
+    return vars;
+  };
+  const responseHandler = () => {
+    result.innerHTML = `<main id = "response" class="container mt-3">`;
+  };
+  const getReviews = async () => {
+    const clicked_spot_id = getUrlVars()["spot"];
+    const get_reviews_url = base_url + "comments/" + clicked_spot_id;
+    const response = await nature_glamour_pages.getAPI(get_reviews_url);
+    const all_reviews = document.getElementById("allReviews");
+    let reviews_list = `<div id = "allReviews">`;
 
+    if (response.data.status == "error") {
+      result.innerHTML = `<main id = "response" class="container mt-3">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
+        </div></main>`;
+    }
+    if (response.data.status == "success") {
+      const reviews = response.data.comments;
+      reviews.map(
+        (review, i) =>
+          (reviews_list += `<div class="card margin-bttm">
+            <div class="card-body">
+              <h5 class="card-title">${review.username}</h5>
+              <p class="card-text">${review.comment}</p>
+            </div>
+          </div>`)
+      );
+    }
+    reviews_list += `</div>`;
+    all_reviews.innerHTML = reviews_list;
+  };
+  getReviews();
+};
