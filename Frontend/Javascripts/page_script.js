@@ -125,10 +125,11 @@ nature_glamour_pages.load_login = () => {
           <div class="alert alert-success alert-dismissible fade show" role="alert">${response.data.results}
         </div></main>`;
       setTimeout(responseHandler, 2000);
+      console.log(access_token);
       // Switching to the stream page
-      setTimeout(function () {
-        window.location.href = "gallery.html";
-      }, 2000);
+      // setTimeout(function () {
+      //   window.location.href = "gallery.html";
+      // }, 2000);
     }
   };
   login_btn.addEventListener("click", login);
@@ -136,9 +137,6 @@ nature_glamour_pages.load_login = () => {
 };
 nature_glamour_pages.load_gallery = () => {
   const result = document.getElementById("response");
-  const responseHandler = () => {
-    result.innerHTML = `<main id = "response" class="container mt-3">`;
-  };
   const getSpots = async () => {
     const get_spots_url = base_url + "posts";
     const response = await nature_glamour_pages.getAPI(get_spots_url);
@@ -208,9 +206,6 @@ nature_glamour_pages.load_reviews = () => {
       }
     );
     return vars;
-  };
-  const responseHandler = () => {
-    result.innerHTML = `<main id = "response" class="container mt-3">`;
   };
   const getReviews = async () => {
     const clicked_spot_id = getUrlVars()["spot"];
