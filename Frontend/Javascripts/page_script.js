@@ -107,7 +107,6 @@ nature_glamour_pages.load_login = () => {
     login_data.append("password", document.getElementById("password").value);
 
     const response = await nature_glamour_pages.postAPI(login_url, login_data);
-    console.log(response);
     if (response.data.status == "error") {
       result.innerHTML = `<main id = "response" class="container mt-3">
           <div class="alert alert-danger alert-dismissible fade show" role="alert">${response.data.results}
@@ -152,10 +151,11 @@ nature_glamour_pages.load_gallery = () => {
     if (response.data.status == "success"){
       const all_spots = document.getElementById("allSpots");
       const spots = response.data.posts;
+  
       let spots_list = `<div id = "allSpots">`;
       spots.map((spot, i) =>
-      (spots_list += `
-      <div id = ${spot.id} class="container">
+      (spots_list += 
+      `<div id = ${spot.id} class="container">
         <div class="card">
           <div class="row">
             <div class="col-md-4">
@@ -171,7 +171,7 @@ nature_glamour_pages.load_gallery = () => {
                 </p>
                 <div class="flex-row">
                   <img class="heart-img" src="../Utils/empty_heart.png">
-                  <p class="like-text">22</p>
+                  <p class="like-text">${all_likes}</p>
                 </div>
                 <a id = ${spot.id} href = "./reviews.html" class="btn">+Review</a>
               </div>
