@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NatureGlamour</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.css"
+    />
+    <link rel="stylesheet" href="../Stylesheets/app.css" />
+    <link rel="stylesheet" href="../Stylesheets/spot.css" />
+  </head>
+
+  <body class="main-container">
+    <nav class="navbar nav-bar navbar-expand-lg navbar-dark">
+      <div class="container-fluidd">
+        <a class="navbar-brandd" href="#">NatureGlamour</a>
+        <div class="navbar-nav">
+          <div class="topnav" id="myTopnav">
+            <a href="./home.html">Home</a>
+            <a href="./spots.html">Add Spot</a>
+            <a href="./gallery.html">Gallery</a>
+            <a id="is-user" href="./register.html">Login</a>
+            <a href="#" id="icon" class="icon navbar-toggler-iconn"></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <div id="map"></div>
+          <h2>Leave a Review</h2>
+          <div class="margin-bttm">
+            <label class="form-label">Review Text</label>
+            <textarea
+              class="form-control"
+              id="reviewBody"
+              cols="30"
+              rows="3"
+              required
+            ></textarea>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <button id = "addReview" class="btn btn-success">Submit</button>
+          <h2>Spot Reviews</h2>
+          <div id="allReviews">
+            </div>
+          </div>
+        </div>
+        <main id="response" class="container response"></main>
+      </div>
+    </div>
+    <footer class="footer"></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="../Javascripts/page_script.js" type="text/javascript"></script>
+    <script>
+      nature_glamour_pages.loadFor("reviews");
+    </script>
+  </body>
+</html>

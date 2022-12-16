@@ -1,0 +1,122 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.card-body {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+}
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex: 1 0 100%;
+  flex-wrap: wrap;
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-right: calc(var(--bs-gutter-x) / -2);
+  margin-left: calc(var(--bs-gutter-x) / -2);
+}
+.col-md-4 {
+  flex: 0 0 auto;
+  width: 33.333333%;
+}
+.img-fluid {
+  margin: 1rem;
+  max-width: 100%;
+  height: auto;
+}
+.col-md-8 {
+  flex: 0 0 auto;
+  width: 66.666667%;
+}
+.card-title {
+  margin:1rem;
+}
+
+.card-text {
+  margin:1rem;
+}
+.text-muted {
+  color: #6c757d;
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  /* overflow: hidden; add this to contain floated children */
+}
+.heart-img {
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  margin:1rem;
+  width: 4%;
+  height:  4%;
+}
+.btn {  
+  font-weight: 300;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #495057;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  color: #fff;
+  background-color: #495057;
+  width: 30%;
+  float: right;
+  margin : 1rem;
+}
+.btn:hover {
+  color: #fff;
+  background-color: #6e747a;
+  border-color: #6b747d;
+}
+.like-text {
+  font-weight: 100;
+  font-size:small;
+  margin-top:1.5rem;
+  align-items: flex-end;
+}
+
